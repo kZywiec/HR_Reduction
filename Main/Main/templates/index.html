@@ -1,0 +1,121 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="report-panel">
+        <!-- List Panel -->
+        <div class="list-panel">
+            <div class="job-list" id="job_list">
+                <pre id="default_content">
+                                     ▄█    █▄       ▄████████                              
+                                    ███    ███     ███    ███                              
+                                    ███    ███     ███    ███                              
+                                   ▄███▄▄▄▄███▄▄  ▄███▄▄▄▄██▀                              
+                                  ▀▀███▀▀▀▀███▀   ▀█████████▄                               
+                                    ███    ███     ███    ███                            
+                                    ███    ███     ███    ███                              
+                                    ███    █▀      ███    ███                              
+                                                                                 
+                      ▄████████    ▄████████ ████████▄  ███    █▄   ▄████████    ▄████████ 
+                     ███    ███   ███    ███ ███   ▀███ ███    ███ ███    ███   ███    ███ 
+                     ███    ███   ███    █▀  ███    ███ ███    ███ ███    █▀    ███    █▀  
+                    ▄███▄▄▄▄██▀  ▄███▄▄▄     ███    ███ ███    ███ ███         ▄███▄▄▄     
+                   ▀▀███▀▀▀▀▀   ▀▀███▀▀▀     ███    ███ ███    ███ ███        ▀▀███▀▀▀     
+                   ▀███████████   ███    █▄  ███    ███ ███    ███ ███    █▄    ███    █▄  
+                     ███    ███   ███    ███ ███   ▄███ ███    ███ ███    ███   ███    ███ 
+                     ███    ███   ██████████ ████████▀  ████████▀  ████████▀    ██████████ 
+                     ███    ███ </pre>
+            </div>
+        </div>
+
+        <!-- Sliders Panel -->
+        <div class="sliders-panel">
+            <div class="sliders-row">
+                <div>
+                    <label for="experience_margin">Experience Margin:</label>
+                    <input type="range" id="experience_margin" class="slider" min="0" max="20" value="2">
+                    <span id="experience_value">2 Years</span>
+                </div>
+                <div>
+                    <label for="salary_margin">Salary Margin:</label>
+                    <input type="range" id="salary_margin" class="slider" min="0" max="75000" value="5000">
+                    <span id="salary_value">5000 $</span>
+                </div>
+                <div>
+                    <label for="skill_margin">Skill Margin:</label>
+                    <input type="range" id="skill_margin" class="slider" min="0" max="10" value="2">
+                    <span id="skill_value">2 of required skills</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generate Button -->
+        <button id="generate_button">Generate Report</button>
+    </div>
+
+    <!-- Search Panel -->
+    <div class="search-panel">
+        <h2>Search Filters:</h2>
+        <input type="text" id="job_title" placeholder="Job Title">
+        <input type="number" id="required_experience" placeholder="Job Experience Required">
+        <input type="text" id="key_skills" placeholder="Key Skills">
+        <input type="text" id="role_category" placeholder="Role Category">
+        <input type="text" id="location" placeholder="Location">
+        <input type="text" id="functional_area" placeholder="Functional Area">
+        <input type="text" id="industry" placeholder="Industry">
+        <button id="search_button">Search</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const experienceSlider = document.getElementById('experience_margin');
+        const experienceValue = document.getElementById('experience_value');
+        const salarySlider = document.getElementById('salary_margin');
+        const salaryValue = document.getElementById('salary_value');
+        const skillSlider = document.getElementById('skill_margin');
+        const skillValue = document.getElementById('skill_value');
+
+        // Aktualizacja wartości na starcie z dopiskami
+        experienceValue.textContent = experienceSlider.value + " Years";
+        salaryValue.textContent = salarySlider.value + " $";
+        skillValue.textContent = skillSlider.value + " of required skills";
+
+        // Aktualizacja wartości przy zmianie
+        experienceSlider.addEventListener('input', () => {
+            experienceValue.textContent = experienceSlider.value + " Years";
+        });
+
+        salarySlider.addEventListener('input', () => {
+            salaryValue.textContent = salarySlider.value + " $";
+        });
+
+        skillSlider.addEventListener('input', () => {
+            skillValue.textContent = skillSlider.value + " of required skills";
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchButton = document.getElementById('search_button');
+        const jobList = document.getElementById('job_list');
+        const defaultContent = document.getElementById('default_content');
+
+        // Obsługa przycisku Search
+        searchButton.addEventListener('click', () => {
+            // Przykładowa dynamiczna zawartość
+            const dynamicContent = `
+1. Software Developer - $80,000 - Remote
+2. Data Analyst - $70,000 - On-Site
+3. Project Manager - $90,000 - Hybrid
+            `;
+
+            // Zamiana domyślnej zawartości na dynamiczną
+            defaultContent.textContent = dynamicContent;
+        });
+    });
+
+</script>
+
+
+
+{% endblock %}
