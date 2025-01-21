@@ -20,3 +20,23 @@ class ApplicantSkill(db.Model):
     applicant_id = db.Column(db.BigInteger, db.ForeignKey('applicants.applicant_id'), primary_key=True)
     skill_id = db.Column(db.BigInteger, db.ForeignKey('skills.skill_id'), primary_key=True)
 
+class JobOffer(db.Model):
+    __tablename__ = 'job_offers'
+    job_offer_id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    job_title = db.Column(db.String(255), nullable=False)
+    role_category = db.Column(db.String(255), nullable=False)
+    location = db.Column(db.String(255), nullable=False)
+    functional_area = db.Column(db.String(255))
+    industry = db.Column(db.String(255))
+    salary = db.Column(db.Float, nullable=False)
+    required_experience = db.Column(db.Integer, nullable=False)
+
+class JobOfferSkill(db.Model):
+    __tablename__ = 'job_offer_skills'
+    job_offer_id = db.Column(db.BigInteger, db.ForeignKey('job_offers.job_offer_id'), primary_key=True)
+    skill_id = db.Column(db.BigInteger, db.ForeignKey('skills.skill_id'), primary_key=True)
+
+class Application(db.Model):
+    __tablename__ = 'applications'
+    applicant_id = db.Column(db.BigInteger, db.ForeignKey('applicants.applicant_id'), primary_key=True)
+    job_offer_id = db.Column(db.BigInteger, db.ForeignKey('job_offers.job_offer_id'), primary_key=True)

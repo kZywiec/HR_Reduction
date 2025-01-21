@@ -14,7 +14,7 @@ IF OBJECT_ID('applicants', 'U') IS NOT NULL DROP TABLE applicants;
 
 -- Tabela: job_offers
 CREATE TABLE job_offers (
-    job_offer_id BIGINT PRIMARY KEY,
+    job_offer_id BIGINT IDENTITY(1,1) PRIMARY KEY,
     job_title NVARCHAR(255) NOT NULL,
     role_category NVARCHAR(255),
     location NVARCHAR(255),
@@ -59,10 +59,11 @@ CREATE TABLE applicant_skills (
 );
 
 -- Tabela: applications
-CREATE TABLE applications (
-    application_id BIGINT PRIMARY KEY,
+CREATE TABLE applications ( 
     applicant_id BIGINT NOT NULL,
     job_offer_id BIGINT NOT NULL,
+	PRIMARY KEY (applicant_id, job_offer_id),
     FOREIGN KEY (applicant_id) REFERENCES applicants(applicant_id) ON DELETE CASCADE,
     FOREIGN KEY (job_offer_id) REFERENCES job_offers(job_offer_id) ON DELETE CASCADE
 );
+

@@ -3,7 +3,7 @@ from Config.Models import Applicant
 from Config.DataBase import db, app
 
 def import_applicants(file_path):
-    with app.app_context():  # Dodaj kontekst aplikacji
+    with app.app_context():
         with db.session.begin():
             with open(file_path, 'r', encoding='utf-8') as file:
                 reader = csv.DictReader(file)
@@ -13,7 +13,8 @@ def import_applicants(file_path):
                     functional_area = row['Functional Area'].strip()
                     experience = int(row['Experience (Years)'])
                     expected_salary = float(row['Expected Salary'])
-                    db.session.add(Applicant(
+                    
+                    db.session.merge(Applicant(
                         applicant_name=applicant_name,
                         industry=industry,
                         functional_area=functional_area,

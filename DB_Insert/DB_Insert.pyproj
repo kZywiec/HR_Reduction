@@ -27,20 +27,27 @@
     <Compile Include="Config\__init__.py" />
     <Compile Include="DB_Setup.py" />
     <Compile Include="Utils\applicants_importer.py" />
-    <Compile Include="Utils\relations_importer.py" />
+    <Compile Include="utils\applications_importer.py" />
+    <Compile Include="utils\job_offers_importer.py" />
+    <Compile Include="utils\job_offer_skills_importer.py" />
+    <Compile Include="Utils\applicant_skills_importer.py" />
     <Compile Include="Utils\skills_importer.py" />
     <Compile Include="Utils\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Config\" />
+    <Folder Include="Scripts\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Applicants.csv" />
     <Content Include="Data\Applicants_Skills.csv" />
+    <Content Include="Data\Job_offers.csv" />
+    <Content Include="Data\Job_offer_Skills.csv" />
+    <Content Include="Data\Applications.csv" />
     <Content Include="Data\Skills.csv" />
-    <Content Include="TextFile1.sql" />
+    <Content Include="Scripts\DB_script.sql" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env1\">

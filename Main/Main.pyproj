@@ -28,6 +28,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Processing\report_generator.py" />
+    <Compile Include="Processing\run_report.py" />
+    <Compile Include="Processing\visualization.py" />
     <Compile Include="runserver.py" />
     <Compile Include="Main\__init__.py" />
     <Compile Include="Main\views.py" />
@@ -40,6 +43,7 @@
     <Folder Include="Main\static\Images\" />
     <Folder Include="Main\static\scripts\" />
     <Folder Include="Main\templates\" />
+    <Folder Include="Processing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main\static\Images\Logo.png" />
