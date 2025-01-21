@@ -4,6 +4,8 @@ This script runs the Main application using a development server.
 
 from os import environ
 from Main import app
+from Config.DataBase import app, db
+from Main.views import *
 
 if __name__ == '__main__':
     HOST = environ.get('SERVER_HOST', 'localhost')
@@ -12,3 +14,5 @@ if __name__ == '__main__':
     except ValueError:
         PORT = 5555
     app.run(HOST, PORT)
+    
+    

@@ -4,9 +4,8 @@
 <div class="main-wrapper">
     <div class="report-panel">
         <!-- List Panel -->
-        <div class="list-panel">
-            <div class="job-list" id="job_list">
-                <pre id="default_content">
+        <div class="job-list" id="job_list">
+            <pre id="default_content">
                                      ▄█    █▄       ▄████████                              
                                     ███    ███     ███    ███                              
                                     ███    ███     ███    ███                              
@@ -25,8 +24,19 @@
                      ███    ███   ███    ███ ███   ▄███ ███    ███ ███    ███   ███    ███ 
                      ███    ███   ██████████ ████████▀  ████████▀  ████████▀    ██████████ 
                      ███    ███ </pre>
-            </div>
+            <table>
+                <thead id="job_table_head" style="display: none;">
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Salary</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody id="job_offers">
+                </tbody>
+            </table>
         </div>
+    
 
         <!-- Sliders Panel -->
         <div class="sliders-panel">
@@ -81,7 +91,6 @@
         salaryValue.textContent = salarySlider.value + " $";
         skillValue.textContent = skillSlider.value + " of required skills";
 
-        // Aktualizacja wartości przy zmianie
         experienceSlider.addEventListener('input', () => {
             experienceValue.textContent = experienceSlider.value + " Years";
         });
@@ -97,25 +106,93 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         const searchButton = document.getElementById('search_button');
-        const jobList = document.getElementById('job_list');
+        const generateButton = document.getElementById('generate_button');
+        const jobOffersTable = document.getElementById('job_offers');
+        const tableHead = document.getElementById('job_table_head');
         const defaultContent = document.getElementById('default_content');
+        let selectedJobId = null; // Przechowuje ID wybranej oferty
 
         // Obsługa przycisku Search
-        searchButton.addEventListener('click', () => {
-            // Przykładowa dynamiczna zawartość
-            const dynamicContent = `
-1. Software Developer - $80,000 - Remote
-2. Data Analyst - $70,000 - On-Site
-3. Project Manager - $90,000 - Hybrid
-            `;
+        searchButton.addEventListener('click', async () => {
+            const filters = {
+                job_title: document.getElementById('job_title').value,
+                required_experience: document.getElementById('required_experience').value,
+                key_skills: document.getElementById('key_skills').value,
+                role_category: document.getElementById('role_category').value,
+                location: document.getElementById('location').value,
+                functional_area: document.getElementById('functional_area').value,
+                industry: document.getElementById('industry').value
+            };
 
-            // Zamiana domyślnej zawartości na dynamiczną
-            defaultContent.textContent = dynamicContent;
+            // Wysłanie zapytania do serwera
+            const response = await fetch('/search_job_offers', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(filters)
+            });
+
+            // Aktualizacja tabeli wyników
+            if (response.ok) {
+                const results = await response.json();
+                jobOffersTable.innerHTML = '';
+                defaultContent.style.display = 'none';
+                tableHead.style.display = 'table-header-group';
+
+                if (results.length > 0) {
+                    results.forEach(job => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td>${job.job_title}</td>
+                        <td>$${job.salary}</td>
+                        <td>${job.location}</td>
+                    `;
+                        row.dataset.id = job.job_offer_id; // Przypisz ID jako atrybut danych
+                        row.addEventListener('click', () => {
+                            document.querySelectorAll('.job-list tr').forEach(item => {
+                                item.classList.remove('selected');
+                            });
+                            row.classList.add('selected');
+                            selectedJobId = job.job_offer_id; // Ustaw wybrany ID
+                            console.log(`Wybrano ofertę pracy o ID: ${selectedJobId}`);
+                        });
+                        jobOffersTable.appendChild(row);
+                    });
+                } else {
+                    jobOffersTable.innerHTML = '<tr><td colspan="3">Nie znaleziono ofert pracy.</td></tr>';
+                }
+            } else {
+                jobOffersTable.innerHTML = '<tr><td colspan="3">Wystąpił błąd podczas wyszukiwania.</td></tr>';
+            }
+        });
+
+        // Obsługa przycisku Generate Report
+        generateButton.addEventListener('click', () => {
+            if (selectedJobId) {
+                // Pobieranie wartości sliderów
+                const experienceMargin = document.getElementById('experience_margin').value;
+                const salaryMargin = document.getElementById('salary_margin').value;
+                const skillMargin = document.getElementById('skill_margin').value;
+
+                console.log(`Generowanie raportu dla ID: ${selectedJobId}`);
+                console.log(`Margines doświadczenia: ${experienceMargin}`);
+                console.log(`Margines wynagrodzenia: ${salaryMargin}`);
+                console.log(`Margines umiejętności: ${skillMargin}`);
+
+                const params = new URLSearchParams({
+                    job_offer_id: selectedJobId,
+                    experience_margin: experienceMargin,
+                    salary_margin: salaryMargin,
+                    skill_margin: skillMargin
+                });
+
+                // Tutaj możesz przekazać jobId do endpointu generującego raport
+                // Przykład:
+                window.location.href = `/generate_report?${params.toString()}`;
+            } else {
+                alert('Wybierz ofertę pracy przed wygenerowaniem raportu.');
+            }
         });
     });
 
 </script>
-
-
-
 {% endblock %}

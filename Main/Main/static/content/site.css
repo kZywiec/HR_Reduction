@@ -56,30 +56,54 @@ h2 {
 }
 
 .job-list {
-    height: 100%;
-    overflow-y: auto;
+    height: 375px; /* Ustaw maksymalną wysokość kontenera */
+    overflow-y: auto; /* Włącz przewijanie pionowe */
     background-color: var(--dark-navy);
     padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--steel-blue);
 }
 
-    .job-list a {
-        display: block;
+    .job-list table {
+        width: 100%; /* Dopasowanie tabeli do szerokości kontenera */
+        border-collapse: collapse; /* Scal linie granic */
         color: var(--light-gray);
-        text-decoration: none;
-        margin: 5px 0;
+        background-color: var(--dark-navy);
     }
 
-        .job-list a:hover {
-            color: var(--light-steel-blue);
-        }
+    .job-list th, .job-list td {
+        text-align: left;
+        padding: 10px;
+        border-bottom: 1px solid var(--steel-blue); /* Dodaj linie między wierszami */
+    }
+
+    .job-list th {
+        background-color: var(--steel-blue); /* Kolor nagłówków */
+        color: var(--light-gray);
+        font-weight: bold;
+        position: sticky; /* Utrzymaj nagłówki na górze podczas przewijania */
+        top: 0;
+        z-index: 1;
+    }
+
+    .job-list tr:hover {
+        background-color: var(--navy); /* Zmień kolor tła wiersza podczas najechania */
+        color: var(--light-steel-blue);
+        cursor: pointer;
+    }
+
+    .job-list tr.selected {
+        background-color: var(--light-steel-blue); /* Kolor tła dla zaznaczonego wiersza */
+        color: var(--dark-navy);
+        font-weight: bold;
+    }
 
 #default_content {
     color: var(--light-gray);
     background-color: var(--dark-navy);
     margin: 0px;
     font-size: 11px;
+    height:97%;
 }
 
 
@@ -148,7 +172,7 @@ input[type="text"], input[type="number"] {
     border-radius: 5px;
     background-color: var(--light-gray);
     color: var(--dark-navy);
-    font-weight:700;
+    font-weight: 700;
 }
 
 button {
@@ -167,7 +191,3 @@ button {
     button:hover {
         background-color: var(--navy);
     }
-
-
-
-

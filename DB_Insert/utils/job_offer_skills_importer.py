@@ -1,4 +1,4 @@
-import csv
+﻿import csv
 from Config.Models import JobOffer, JobOfferSkill, Application
 from Config.DataBase import db, app
 
@@ -16,4 +16,4 @@ def import_job_offer_skills(file_path):
                         job_offer_id=job_offer_id,
                         skill_id=skill_id
                     ))
-    print(f"Dane z {file_path} zosta?y zaimportowane do tabeli applicant_skills.")
+    print(f"Dane z {file_path} zostały zaimportowane do tabeli applicant_skills.")
