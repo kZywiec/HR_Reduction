@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Offer Report</title>
+    <style>
+        body
+        {
+            font-family: Arial, sans-serif;
+            background-color: #0d1b2a;
+            color: #e0e1dd;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container
+        {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #1b263b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2
+        {
+            text-align: center;
+            color: #e0e1dd;
+        }
+
+        p
+        {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td
+        {
+            border: 1px solid #415a77;
+        }
+
+        th, td
+        {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th
+        {
+            background-color: #415a77;
+            color: #e0e1dd;
+        }
+
+        .charts
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .chart
+        {
+            width: 45%;
+            text-align: center;
+        }
+
+        img
+        {
+            max-width: 100%;
+            border: 1px solid #415a77;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Offer Report</h1>
+        <h2>Job Details</h2>
+        <p><strong>Job Title:</strong> {{ job_title }}</p>
+        <p><strong>Location:</strong> {{ location }}</p>
+        <p><strong>Salary:</strong> ${{ salary }}</p>
+        <p><strong>Required Skills:</strong> {{ ', '.join(required_skills) }}</p>
+
+        <h2>Matching Candidates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Experience (Years)</th>
+                    <th>Requested Salary</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.experience }}</td>
+                    <td>${{ candidate.req_salary }}</td>
+                    <td>{{ candidate.skills }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="charts">
+            <div class="chart">
+                <h3>Salary Distribution</h3>
+                <img src="{{ salary_chart }}" alt="Salary Distribution Chart">
+            </div>
+            <div class="chart">
+                <h3>Skill Match Distribution</h3>
+                <img src="{{ skill_match_chart }}" alt="Skill Match Distribution Chart">
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="chart">
+                <h3>Experience Distribution</h3>
+                <img src="{{ experience_chart }}" alt="Experience Distribution Chart">
+            </div>
+            <div class="chart">
+                <h3>Experience vs. Salary</h3>
+                <img src="{{ experience_vs_salary_chart }}" alt="Experience vs. Salary Chart">
+            </div>
+        </div>
+
+        <div class="charts">
+            <div class="chart">
+                <h3>Skill Coverage</h3>
+                <img src="{{ skill_coverage_chart }}" alt="Skill Coverage Chart">
+            </div>
+            <div class="chart">
+                <h3>Skill Match Heatmap</h3>
+                <img src="{{ skill_heatmap_chart }}" alt="Skill Match Heatmap">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

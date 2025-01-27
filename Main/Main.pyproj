@@ -34,7 +34,6 @@
     </Compile>
     <Compile Include="Main\Utils\__init__.py" />
     <Compile Include="Processing\report_generator.py" />
-    <Compile Include="Processing\run_report.py" />
     <Compile Include="Processing\visualization.py" />
     <Compile Include="runserver.py" />
     <Compile Include="Main\__init__.py" />
@@ -53,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main\static\Images\Logo.png" />
+    <Content Include="Main\templates\report_template.html" />
     <Content Include="requirements.txt" />
     <Content Include="Main\static\content\bootstrap.css" />
     <Content Include="Main\static\content\bootstrap.min.css" />
