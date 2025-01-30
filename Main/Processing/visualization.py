@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 import io
 import base64
 import seaborn as sns
@@ -118,7 +120,22 @@ def plot_skill_match_heatmap(filtered_applicants, required_skills):
         data.append([1 if skill in applicant_skills else 0 for skill in required_skills])
 
     df = pd.DataFrame(data, columns=required_skills, index=[app['applicant_name'] for app in filtered_applicants])
+    if df.empty:
+        # Generate a blank plot with a warning if DataFrame is unexpectedly empty
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.text(0.5, 0.5, 'No valid skill match data', 
+                horizontalalignment='center', verticalalignment='center', 
+                fontsize=14, color='red', transform=ax.transAxes)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_frame_on(False)
 
+        img_io = io.BytesIO()
+        fig.savefig(img_io, format='png', bbox_inches='tight')
+        img_io.seek(0)
+        plt.close(fig)
+
+        return f"data:image/png;base64,{base64.b64encode(img_io.read()).decode('utf-8')}"
     plt.figure(figsize=(10, len(filtered_applicants) * 0.5))
     sns.heatmap(df, annot=True, cbar=False, cmap="YlGnBu", linewidths=0.5)
     plt.xlabel('Required Skills')
