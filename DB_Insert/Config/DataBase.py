@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # DB Server link
-sql_server = 'LAPTOP-770L9VPM\\SQLEXPRESS' # Replace with yours 
+sql_server = '(localDB)\localDB' # Replace with yours 
 
 # Inicjalizacja aplikacji Flask i konfiguracji bazy danych
 app = Flask(__name__)

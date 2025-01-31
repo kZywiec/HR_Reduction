@@ -16,7 +16,7 @@ def generate_report(job_offer_id, experience_margin=2, salary_margin=5000, skill
     filtered_applicants = []
     for app in applicants:
         if (
-            abs(app['experience'] - job_offer['required_experience']) <= experience_margin and
+            abs(app['experience'] + experience_margin) >=  job_offer['required_experience'] and
             abs(app['expected_salary'] - job_offer['salary']) <= salary_margin and
             len(set(app['skill_name'].split(',')).intersection(required_skills)) >= skill_margin
         ):
