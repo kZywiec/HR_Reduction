@@ -18,7 +18,7 @@ def generate_report(job_offer_id, experience_margin=2, salary_margin=5000, skill
         if (
             abs(app['experience'] + experience_margin) >=  job_offer['required_experience'] and
             abs(app['expected_salary'] - job_offer['salary']) <= salary_margin and
-            len(set(app['skill_name'].split(',')).intersection(required_skills)) >= skill_margin
+            len(set(app['skill_name'].split(', ')).intersection(required_skills)) >= skill_margin
         ):
             filtered_applicants.append(app)
 
