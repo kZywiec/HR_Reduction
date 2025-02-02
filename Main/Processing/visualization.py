@@ -30,7 +30,7 @@ def plot_salary_distribution(job_offer, filtered_applicants, job_offer_id):
 
 def plot_skill_match_distribution(filtered_applicants, required_skills):
     skill_matches = [
-        len(set(app['skill_name'].split(',')).intersection(required_skills))
+        len(set(app['skill_name'].split(', ')).intersection(required_skills))
         for app in filtered_applicants
     ]
     names = [app['applicant_name'] for app in filtered_applicants]
@@ -116,7 +116,7 @@ def plot_skill_coverage(filtered_applicants, required_skills):
 def plot_skill_match_heatmap(filtered_applicants, required_skills):
     data = []
     for app in filtered_applicants:
-        applicant_skills = set(app['skill_name'].split(','))
+        applicant_skills = set(app['skill_name'].split(', '))
         data.append([1 if skill in applicant_skills else 0 for skill in required_skills])
 
     df = pd.DataFrame(data, columns=required_skills, index=[app['applicant_name'] for app in filtered_applicants])
