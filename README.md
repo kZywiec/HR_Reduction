@@ -9,6 +9,19 @@ Kod definiuje struktury tabel oraz funkcje pomocnicze do obsługi bazy danych w 
 Wykorzystuje SQLAlchemy jako ORM (Object-Relational Mapping) do interakcji z bazą danych.
 
 ---
+## Jak uruchomić?
+Środowisko: Visual Studio 2022 (Python 3.11 | 64-bit)
+
+1) Upewnij się że posiadasz wszystkie niezbędne pakiety (Main/requirements.txt)
+2) Wykonaj querry na Bazie danych (plik DB_Insert/Scripts/DB_script.sql)
+3) Podmień link do swerwera SQL (plik DB_Insert/Config/DataBase)
+![image](https://github.com/user-attachments/assets/549786c8-9718-45bf-a3f8-5106aad5ceb0)
+4) Uruchom Projekt DB_Insert i poczekaj aż wszystkie dane zostaną załadowane
+5) Uruchom Projekt Main 
+
+---
+## Struktura Bazy Danych
+![image](https://github.com/user-attachments/assets/f222dc8f-96e9-4a5f-964e-15df97c30e1b)
 
 ## Struktura Modeli Danych  
 
